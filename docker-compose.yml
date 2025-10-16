@@ -1,0 +1,34 @@
+services:
+  auth-database:
+    container_name: auth-database
+    image: postgres
+    ports:
+      - '5433:5432'
+    restart: always
+    env_file: '.env'
+    networks:
+      auth-network:
+        ipv4_address: 10.5.0.10
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready']
+      interval: 1s
+      timeout: 5s
+      retries: 5
+  auth-app:
+    container_name: auth-app
+    build: .
+    ports:
+      - '3000:3000'
+    depends_on:
+      auth-database:
+        condition: service_healthy
+    command: npm run start:prod
+    networks:
+      - auth-network
+networks:
+  auth-network:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.5.0.0/24
