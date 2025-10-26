@@ -1,7 +1,7 @@
 import { InjectDataSource } from '@nestjs/typeorm';
 import { Permission, PermissionPrimitive } from 'src/auth/domain/Permission';
 import { PermissionRepository } from 'src/auth/domain/PermissionRepository';
-import { DataSource } from 'typeorm';
+import { DataSource, In } from 'typeorm';
 import { PermissionEntity } from '../entities/PermissionEntity';
 
 export class PgPermissionRepository implements PermissionRepository {
@@ -29,6 +29,14 @@ export class PgPermissionRepository implements PermissionRepository {
     const foundPermissions = await this.dataSource
       .getRepository(PermissionEntity)
       .find();
+
+    return foundPermissions.map((permission) => Permission.create(permission));
+  }
+
+  async findByIds(ids: string[]): Promise<Permission[]> {
+    const foundPermissions = await this.dataSource
+      .getRepository(PermissionEntity)
+      .find({ where: { id: In(ids) } });
 
     return foundPermissions.map((permission) => Permission.create(permission));
   }

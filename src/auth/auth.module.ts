@@ -2,14 +2,19 @@ import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 import { CreatePermission } from './application/createPermission';
+import { CreateRole } from './application/createRole';
 import { GetAllPermissions } from './application/getAllPermissions';
+import { GetAllRoles } from './application/getAllRoles';
 import { GetUserByCredentials } from './application/getUserByCredentials';
 import { SignUp } from './application/signUp';
 import { PermissionRepository } from './domain/PermissionRepository';
+import { RoleRepository } from './domain/RoleRepository';
 import { UserAccountRepository } from './domain/UserAccountRepository';
 import { AuthController } from './infrastructure/controllers/v1/auth.controller';
 import { PermissionController } from './infrastructure/controllers/v1/permission.controller';
+import { RoleController } from './infrastructure/controllers/v1/role.controller';
 import { PgPermissionRepository } from './infrastructure/repositories/PgPermissionRepository';
+import { PgRoleRepository } from './infrastructure/repositories/PgRoleRepository';
 import { PgUserAccountRepository } from './infrastructure/repositories/PgUserAccountRepository';
 
 @Module({
@@ -23,7 +28,7 @@ import { PgUserAccountRepository } from './infrastructure/repositories/PgUserAcc
       inject: [ConfigService],
     }),
   ],
-  controllers: [AuthController, PermissionController],
+  controllers: [AuthController, PermissionController, RoleController],
   providers: [
     {
       provide: UserAccountRepository,
@@ -37,7 +42,13 @@ import { PgUserAccountRepository } from './infrastructure/repositories/PgUserAcc
       provide: PermissionRepository,
       useClass: PgPermissionRepository,
     },
+    {
+      provide: RoleRepository,
+      useClass: PgRoleRepository,
+    },
+    CreateRole,
+    GetAllRoles,
   ],
-  exports: [UserAccountRepository],
+  exports: [UserAccountRepository, RoleRepository, PermissionRepository],
 })
 export class AuthModule {}

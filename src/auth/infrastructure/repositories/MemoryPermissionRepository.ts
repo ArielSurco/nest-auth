@@ -29,4 +29,14 @@ export class MemoryPermissionRepository implements PermissionRepository {
       this.permissions.map((permission) => Permission.create(permission)),
     );
   }
+
+  async findByIds(ids: string[]): Promise<Permission[]> {
+    const foundPermissions = this.permissions.filter((permission) =>
+      ids.includes(permission.id),
+    );
+
+    return Promise.resolve(
+      foundPermissions.map((permission) => Permission.create(permission)),
+    );
+  }
 }

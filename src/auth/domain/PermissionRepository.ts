@@ -6,4 +6,5 @@ export abstract class PermissionRepository {
     code: PermissionPrimitive['code'],
   ): Promise<Permission | null>;
   abstract findAll(): Promise<Permission[]>;
+  abstract findByIds(ids: string[]): Promise<Permission[]>;
 }
