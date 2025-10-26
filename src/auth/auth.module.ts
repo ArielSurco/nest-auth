@@ -1,10 +1,15 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
+import { CreatePermission } from './application/createPermission';
+import { GetAllPermissions } from './application/getAllPermissions';
 import { GetUserByCredentials } from './application/getUserByCredentials';
 import { SignUp } from './application/signUp';
+import { PermissionRepository } from './domain/PermissionRepository';
 import { UserAccountRepository } from './domain/UserAccountRepository';
 import { AuthController } from './infrastructure/controllers/v1/auth.controller';
+import { PermissionController } from './infrastructure/controllers/v1/permission.controller';
+import { PgPermissionRepository } from './infrastructure/repositories/PgPermissionRepository';
 import { PgUserAccountRepository } from './infrastructure/repositories/PgUserAccountRepository';
 
 @Module({
@@ -18,7 +23,7 @@ import { PgUserAccountRepository } from './infrastructure/repositories/PgUserAcc
       inject: [ConfigService],
     }),
   ],
-  controllers: [AuthController],
+  controllers: [AuthController, PermissionController],
   providers: [
     {
       provide: UserAccountRepository,
@@ -26,6 +31,12 @@ import { PgUserAccountRepository } from './infrastructure/repositories/PgUserAcc
     },
     SignUp,
     GetUserByCredentials,
+    CreatePermission,
+    GetAllPermissions,
+    {
+      provide: PermissionRepository,
+      useClass: PgPermissionRepository,
+    },
   ],
   exports: [UserAccountRepository],
 })
