@@ -23,10 +23,9 @@ const auditColumns = {
 
 const idColumn: NonNullable<TableOptions['columns']>[number] = {
   name: 'id',
-  type: 'int',
+  type: 'uuid',
   isPrimary: true,
-  generationStrategy: 'increment',
-  isGenerated: true,
+  default: 'uuid_generate_v4()',
 };
 
 const userAccountTable = new Table({
@@ -75,7 +74,7 @@ const userProfileTable = new Table({
     },
     {
       name: 'user_account_id',
-      type: 'int',
+      type: 'uuid',
     },
   ],
   foreignKeys: [
@@ -110,11 +109,11 @@ const userRoleTable = new Table({
   columns: [
     {
       name: 'role_id',
-      type: 'int',
+      type: 'uuid',
     },
     {
       name: 'user_account_id',
-      type: 'int',
+      type: 'uuid',
     },
   ],
   foreignKeys: [
@@ -147,11 +146,11 @@ const rolePermissionTable = new Table({
   columns: [
     {
       name: 'role_id',
-      type: 'int',
+      type: 'uuid',
     },
     {
       name: 'permission_id',
-      type: 'int',
+      type: 'uuid',
     },
   ],
   foreignKeys: [
@@ -175,11 +174,11 @@ const permissionOverrideTable = new Table({
     auditColumns.updatedAt,
     {
       name: 'permission_id',
-      type: 'int',
+      type: 'uuid',
     },
     {
       name: 'user_account_id',
-      type: 'int',
+      type: 'uuid',
     },
     {
       name: 'override_effect',
@@ -204,6 +203,7 @@ const permissionOverrideTable = new Table({
 
 export class Initialize1760760538622 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
+    await queryRunner.query('CREATE EXTENSION IF NOT EXISTS "uuid-ossp"');
     await queryRunner.createTable(userAccountTable);
     await queryRunner.createTable(userProfileTable);
     await queryRunner.createTable(roleTable);
