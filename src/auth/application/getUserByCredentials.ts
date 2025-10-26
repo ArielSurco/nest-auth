@@ -1,0 +1,32 @@
+import { Injectable } from '@nestjs/common';
+import * as bcrypt from 'bcrypt';
+import { UserAccount, UserAccountPrimitive } from '../domain/UserAccount';
+import { UserAccountRepository } from '../domain/UserAccountRepository';
+
+@Injectable()
+export class GetUserByCredentials {
+  constructor(private readonly userAccountRepository: UserAccountRepository) {}
+
+  async execute({
+    email,
+    password,
+  }: Pick<
+    UserAccountPrimitive,
+    'email' | 'password'
+  >): Promise<UserAccount | null> {
+    const userAccount = await this.userAccountRepository.findByEmailOrUsername({
+      email,
+    });
+
+    if (!userAccount) return null;
+
+    const isPasswordValid = await bcrypt.compare(
+      password,
+      userAccount.toPrimitive().password,
+    );
+
+    if (!isPasswordValid) return null;
+
+    return userAccount;
+  }
+}

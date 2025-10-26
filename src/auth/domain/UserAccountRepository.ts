@@ -5,8 +5,7 @@ export abstract class UserAccountRepository {
   abstract findByEmailOrUsername({
     email,
     username,
-  }: Pick<
-    UserAccountPrimitive,
-    'email' | 'username'
+  }: Partial<
+    Pick<UserAccountPrimitive, 'email' | 'username'>
   >): Promise<UserAccount | null>;
 }
