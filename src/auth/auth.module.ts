@@ -13,9 +13,11 @@ import { UserAccountRepository } from './domain/UserAccountRepository';
 import { AuthController } from './infrastructure/controllers/v1/auth.controller';
 import { PermissionController } from './infrastructure/controllers/v1/permission.controller';
 import { RoleController } from './infrastructure/controllers/v1/role.controller';
+import { AuthGuard } from './infrastructure/guards/auth.guard';
 import { PgPermissionRepository } from './infrastructure/repositories/PgPermissionRepository';
 import { PgRoleRepository } from './infrastructure/repositories/PgRoleRepository';
 import { PgUserAccountRepository } from './infrastructure/repositories/PgUserAccountRepository';
+import { SessionService } from './infrastructure/services/session.service';
 
 @Module({
   imports: [
@@ -48,6 +50,8 @@ import { PgUserAccountRepository } from './infrastructure/repositories/PgUserAcc
     },
     CreateRole,
     GetAllRoles,
+    SessionService,
+    AuthGuard,
   ],
   exports: [UserAccountRepository, RoleRepository, PermissionRepository],
 })

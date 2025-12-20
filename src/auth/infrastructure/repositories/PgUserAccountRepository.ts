@@ -17,6 +17,13 @@ export class PgUserAccountRepository implements UserAccountRepository {
     return UserAccount.create(createdUserAccount);
   }
 
+  async findById(id: string): Promise<UserAccount | null> {
+    const foundUserAccount = await this.dataSource
+      .getRepository(UserAccountEntity)
+      .findOne({ where: { id } });
+    return foundUserAccount ? UserAccount.create(foundUserAccount) : null;
+  }
+
   async findByEmailOrUsername({
     email,
     username,
