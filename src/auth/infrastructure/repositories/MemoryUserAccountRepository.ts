@@ -12,6 +12,15 @@ export class MemoryUserAccountRepository implements UserAccountRepository {
     return Promise.resolve(userAccount);
   }
 
+  async findById(id: string): Promise<UserAccount | null> {
+    const foundUserAccount = this.userAccounts.find(
+      (userAccount) => userAccount.id === id,
+    );
+    return Promise.resolve(
+      foundUserAccount ? UserAccount.create(foundUserAccount) : null,
+    );
+  }
+
   async findByEmailOrUsername({
     email,
     username,

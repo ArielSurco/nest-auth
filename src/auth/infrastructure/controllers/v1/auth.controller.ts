@@ -1,16 +1,20 @@
 import {
   Body,
   Controller,
+  Get,
   HttpCode,
   HttpStatus,
   Post,
   UnauthorizedException,
+  UseGuards,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
-import { JwtService } from '@nestjs/jwt';
 import { SignUp } from '../../../application/signUp';
+import { UserAccountRepository } from '../../../domain/UserAccountRepository';
+import { Session } from '../../decorators/session.decorator';
+import { AuthGuard } from '../../guards/auth.guard';
+import { SessionPayload, SessionService } from '../../services/session.service';
 import { GetUserByCredentials } from './../../../application/getUserByCredentials';
 import { SignInDto } from './dtos/SignInDto';
 import { SignUpDto } from './dtos/SignUpDto';
@@ -20,8 +24,8 @@ export class AuthController {
   constructor(
     private readonly signUpUseCase: SignUp,
     private readonly getUserByCredentialsUseCase: GetUserByCredentials,
-    private readonly jwtService: JwtService,
-    private readonly configService: ConfigService,
+    private readonly sessionService: SessionService,
+    private readonly userAccountRepository: UserAccountRepository,
   ) {}
 
   @Post('sign-up')
@@ -49,8 +53,28 @@ export class AuthController {
     }
 
     return {
-      token: this.jwtService.sign({ userId: userAccount.toPrimitive().id }),
-      expiresIn: this.configService.get<string>('JWT_EXPIRES_IN'),
+      token: this.sessionService.sign({ userId: userAccount.toPrimitive().id }),
+    };
+  }
+
+  @Get('me')
+  @HttpCode(HttpStatus.OK)
+  @UseGuards(AuthGuard)
+  async me(@Session() session: SessionPayload) {
+    const userAccount = await this.userAccountRepository.findById(
+      session?.userId ?? '',
+    );
+
+    if (!userAccount) {
+      throw new UnauthorizedException();
+    }
+
+    const accountPrimitive = userAccount.toPrimitive();
+
+    return {
+      id: accountPrimitive.id,
+      username: accountPrimitive.username,
+      email: accountPrimitive.email,
     };
   }
 }

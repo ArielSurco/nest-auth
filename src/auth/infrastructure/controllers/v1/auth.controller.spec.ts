@@ -6,6 +6,7 @@ import { GetUserByCredentials } from '../../../application/getUserByCredentials'
 import { SignUp } from '../../../application/signUp';
 import { UserAccountRepository } from '../../../domain/UserAccountRepository';
 import { MemoryUserAccountRepository } from '../../repositories/MemoryUserAccountRepository';
+import { SessionService } from '../../services/session.service';
 import { AuthController } from './auth.controller';
 
 describe('AuthController', () => {
@@ -49,6 +50,7 @@ describe('AuthController', () => {
             }),
           },
         },
+        SessionService,
         SignUp,
         GetUserByCredentials,
       ],
@@ -113,7 +115,6 @@ describe('AuthController', () => {
       });
 
       expect(response.token).toBeDefined();
-      expect(response.expiresIn).toBeDefined();
     });
 
     it('should return an error when credentials are invalid', async () => {

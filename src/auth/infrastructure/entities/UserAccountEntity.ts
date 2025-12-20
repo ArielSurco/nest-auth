@@ -3,9 +3,12 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  JoinTable,
+  ManyToMany,
   PrimaryColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { RoleEntity } from './RoleEntity';
 
 @Entity('user_account')
 export class UserAccountEntity {
@@ -20,6 +23,21 @@ export class UserAccountEntity {
 
   @Column('varchar')
   password: string;
+
+  @ManyToMany(() => RoleEntity, { eager: true })
+  @JoinTable({
+    name: 'user_role',
+    joinColumn: {
+      name: 'user_account_id',
+      referencedColumnName: 'id',
+    },
+    inverseJoinColumn: {
+      name: 'role_id',
+      referencedColumnName: 'id',
+    },
+    synchronize: false,
+  })
+  roles: RoleEntity[];
 
   @Column('boolean', { default: true })
   active: boolean;
