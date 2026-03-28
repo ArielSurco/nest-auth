@@ -1,0 +1,23 @@
+meta {
+  name: Create Permission
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{URL}}/v1/permission
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "code": "TEST_PERMISSION",
+    "name": "Permiso de prueba"
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

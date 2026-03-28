@@ -1,0 +1,28 @@
+meta {
+  name: Sign In
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{URL}}/v1/auth/sign-in
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "password": "Ariel123!",
+    "email": "arielsurcoa+1@gmail.com"
+  }
+}
+
+script:post-response {
+  let body = res.getBody();
+  bru.setVar('JWT', body.token)
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

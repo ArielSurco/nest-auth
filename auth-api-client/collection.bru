@@ -1,0 +1,11 @@
+auth {
+  mode: bearer
+}
+
+auth:bearer {
+  token: {{JWT}}
+}
+
+vars:pre-request {
+  URL: http://localhost:3000
+}

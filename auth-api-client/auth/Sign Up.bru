@@ -1,0 +1,24 @@
+meta {
+  name: Sign Up
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{URL}}/v1/auth/sign-up
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "username": "ArielSurco1",
+    "password": "Ariel123!",
+    "email": "arielsurcoa+1@gmail.com"
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
