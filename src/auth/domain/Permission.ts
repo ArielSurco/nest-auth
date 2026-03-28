@@ -4,6 +4,8 @@ export interface PermissionPrimitive {
   id: string;
   code: string;
   name: string;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 export class Permission {
@@ -11,11 +13,15 @@ export class Permission {
 
   static create({
     id = uuidv4(),
+    createdAt = new Date(),
+    updatedAt = new Date(),
     ...primitive
-  }: Omit<PermissionPrimitive, 'id'> &
-    Partial<Pick<PermissionPrimitive, 'id'>>) {
+  }: Omit<PermissionPrimitive, 'id' | 'createdAt' | 'updatedAt'> &
+    Partial<Pick<PermissionPrimitive, 'id' | 'createdAt' | 'updatedAt'>>) {
     return new Permission({
       id,
+      createdAt,
+      updatedAt,
       ...primitive,
     });
   }
@@ -25,6 +31,8 @@ export class Permission {
       id: this.primitive.id,
       code: this.primitive.code,
       name: this.primitive.name,
+      createdAt: this.primitive.createdAt,
+      updatedAt: this.primitive.updatedAt,
     };
   }
 }
