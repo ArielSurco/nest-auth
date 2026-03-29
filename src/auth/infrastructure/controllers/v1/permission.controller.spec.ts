@@ -5,6 +5,7 @@ import { CreatePermission } from '../../../application/createPermission';
 import { GetAllPermissions } from '../../../application/getAllPermissions';
 import { PermissionRepository } from '../../../domain/PermissionRepository';
 import { MemoryPermissionRepository } from '../../../infrastructure/repositories/MemoryPermissionRepository';
+import { AuthGuard } from '../../guards/auth.guard';
 import { PermissionController } from './permission.controller';
 
 describe('PermissionController', () => {
@@ -35,7 +36,10 @@ describe('PermissionController', () => {
         CreatePermission,
         GetAllPermissions,
       ],
-    }).compile();
+    })
+      .overrideGuard(AuthGuard)
+      .useValue({ canActivate: () => true })
+      .compile();
 
     permissionController = moduleRef.get(PermissionController);
     permissionRepository = moduleRef.get(PermissionRepository);

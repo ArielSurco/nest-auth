@@ -6,6 +6,7 @@ import { Permission } from '../../../domain/Permission';
 import { PermissionRepository } from '../../../domain/PermissionRepository';
 import { RoleRepository } from '../../../domain/RoleRepository';
 import { MemoryPermissionRepository } from '../../../infrastructure/repositories/MemoryPermissionRepository';
+import { AuthGuard } from '../../guards/auth.guard';
 import { MemoryRoleRepository } from '../../repositories/MemoryRoleRepository';
 import { RoleController } from './role.controller';
 
@@ -38,7 +39,10 @@ describe('RoleController', () => {
         CreateRole,
         GetAllRoles,
       ],
-    }).compile();
+    })
+      .overrideGuard(AuthGuard)
+      .useValue({ canActivate: () => true })
+      .compile();
 
     roleController = moduleRef.get(RoleController);
     roleRepository = moduleRef.get(RoleRepository);
