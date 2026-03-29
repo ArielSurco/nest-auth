@@ -1,3 +1,4 @@
+import { Role } from 'src/auth/domain/Role';
 import {
   Column,
   CreateDateColumn,
@@ -40,4 +41,30 @@ export class RoleEntity {
 
   @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date;
+
+  toDomain(): Role {
+    return Role.create({
+      id: this.id,
+      code: this.code,
+      name: this.name,
+      permissions: this.permissions.map((permission) => permission.toDomain()),
+      createdAt: this.createdAt,
+      updatedAt: this.updatedAt,
+    });
+  }
+
+  static fromDomain(role: Role): RoleEntity {
+    const roleEntity = new RoleEntity();
+    const rolePrimitive = role.toPrimitive();
+
+    roleEntity.id = rolePrimitive.id;
+    roleEntity.code = rolePrimitive.code;
+    roleEntity.name = rolePrimitive.name;
+    roleEntity.permissions = role.permissions.map((permission) =>
+      PermissionEntity.fromDomain(permission),
+    );
+    roleEntity.createdAt = new Date(rolePrimitive.createdAt);
+    roleEntity.updatedAt = new Date(rolePrimitive.updatedAt);
+    return roleEntity;
+  }
 }

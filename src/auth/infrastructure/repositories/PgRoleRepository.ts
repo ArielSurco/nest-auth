@@ -12,19 +12,22 @@ export class PgRoleRepository implements RoleRepository {
   async create(role: Role): Promise<Role> {
     const createdRole = await this.dataSource
       .getRepository(RoleEntity)
-      .save(role.toPrimitive());
-    return Role.create(createdRole);
+      .save(RoleEntity.fromDomain(role));
+
+    return createdRole.toDomain();
   }
 
   async findByCode(code: RolePrimitive['code']): Promise<Role | null> {
     const foundRole = await this.dataSource
       .getRepository(RoleEntity)
       .findOne({ where: { code } });
-    return foundRole ? Role.create(foundRole) : null;
+
+    return foundRole?.toDomain() ?? null;
   }
 
   async findAll(): Promise<Role[]> {
     const foundRoles = await this.dataSource.getRepository(RoleEntity).find();
-    return foundRoles.map((role) => Role.create(role));
+
+    return foundRoles.map((role) => role.toDomain());
   }
 }

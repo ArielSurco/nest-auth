@@ -5,11 +5,15 @@ import {
   HttpCode,
   HttpStatus,
   Post,
+  UseGuards,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
+import { GlobalPermissionCode } from 'src/auth/domain/GlobalPermissionCode';
 import { CreateRole } from '../../../application/createRole';
 import { GetAllRoles } from '../../../application/getAllRoles';
+import { Permissions } from '../../decorators/permission.decorator';
+import { AuthGuard } from '../../guards/auth.guard';
 import { CreateRoleDto } from './dtos/CreateRoleDto';
 
 @Controller('v1/role')
@@ -22,6 +26,8 @@ export class RoleController {
   @Post()
   @HttpCode(HttpStatus.CREATED)
   @UsePipes(new ValidationPipe({ transform: true }))
+  @Permissions([GlobalPermissionCode.CREATE_ROLE])
+  @UseGuards(AuthGuard)
   async createRole(@Body() createRoleDto: CreateRoleDto) {
     const result = await this.createRoleUseCase.execute({
       code: createRoleDto.code,
@@ -29,11 +35,13 @@ export class RoleController {
       permissionIds: createRoleDto.permissionIds,
     });
 
+    const rolePrimitive = result.toPrimitive();
+
     return {
-      id: result.toPrimitive().id,
-      code: result.toPrimitive().code,
-      name: result.toPrimitive().name,
-      permissions: result.toPrimitive().permissions,
+      id: rolePrimitive.id,
+      code: rolePrimitive.code,
+      name: rolePrimitive.name,
+      permissions: rolePrimitive.permissions,
     };
   }
 
@@ -42,11 +50,13 @@ export class RoleController {
   async getAllRoles() {
     const roles = await this.getAllRolesUseCase.execute();
 
-    return roles.map((role) => ({
-      id: role.toPrimitive().id,
-      code: role.toPrimitive().code,
-      name: role.toPrimitive().name,
-      permissions: role.toPrimitive().permissions.map((permission) => ({
+    const rolesPrimitive = roles.map((role) => role.toPrimitive());
+
+    return rolesPrimitive.map((role) => ({
+      id: role.id,
+      code: role.code,
+      name: role.name,
+      permissions: role.permissions.map((permission) => ({
         id: permission.id,
         code: permission.code,
         name: permission.name,

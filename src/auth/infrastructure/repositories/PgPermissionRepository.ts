@@ -1,18 +1,20 @@
+import { Injectable } from '@nestjs/common';
 import { InjectDataSource } from '@nestjs/typeorm';
 import { Permission, PermissionPrimitive } from 'src/auth/domain/Permission';
 import { PermissionRepository } from 'src/auth/domain/PermissionRepository';
 import { DataSource, In } from 'typeorm';
 import { PermissionEntity } from '../entities/PermissionEntity';
 
+@Injectable()
 export class PgPermissionRepository implements PermissionRepository {
   constructor(@InjectDataSource() private readonly dataSource: DataSource) {}
 
   async create(permission: Permission): Promise<Permission> {
     const createdPermission = await this.dataSource
       .getRepository(PermissionEntity)
-      .save(permission.toPrimitive());
+      .save(PermissionEntity.fromDomain(permission));
 
-    return Permission.create(createdPermission);
+    return createdPermission.toDomain();
   }
 
   async findByCode(
@@ -22,7 +24,7 @@ export class PgPermissionRepository implements PermissionRepository {
       .getRepository(PermissionEntity)
       .findOne({ where: { code } });
 
-    return foundPermission ? Permission.create(foundPermission) : null;
+    return foundPermission?.toDomain() ?? null;
   }
 
   async findAll(): Promise<Permission[]> {
@@ -30,7 +32,7 @@ export class PgPermissionRepository implements PermissionRepository {
       .getRepository(PermissionEntity)
       .find();
 
-    return foundPermissions.map((permission) => Permission.create(permission));
+    return foundPermissions.map((permission) => permission.toDomain());
   }
 
   async findByIds(ids: string[]): Promise<Permission[]> {
@@ -38,6 +40,6 @@ export class PgPermissionRepository implements PermissionRepository {
       .getRepository(PermissionEntity)
       .find({ where: { id: In(ids) } });
 
-    return foundPermissions.map((permission) => Permission.create(permission));
+    return foundPermissions.map((permission) => permission.toDomain());
   }
 }

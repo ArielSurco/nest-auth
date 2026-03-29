@@ -1,54 +1,55 @@
 import * as bcrypt from 'bcrypt';
 import 'dotenv/config';
 import { In, MigrationInterface, QueryRunner } from 'typeorm';
-import { Permission, PermissionPrimitive } from '../../auth/domain/Permission';
-import { Role, RolePrimitive } from '../../auth/domain/Role';
+import { GlobalPermissionCode } from '../../auth/domain/GlobalPermissionCode';
+import { Permission, PermissionAttributes } from '../../auth/domain/Permission';
+import { Role, RoleAttributes } from '../../auth/domain/Role';
 import {
   UserAccount,
-  UserAccountPrimitive,
+  UserAccountAttributes,
 } from '../../auth/domain/UserAccount';
 import { PermissionEntity } from '../../auth/infrastructure/entities/PermissionEntity';
 import { RoleEntity } from '../../auth/infrastructure/entities/RoleEntity';
 import { UserAccountEntity } from '../../auth/infrastructure/entities/UserAccountEntity';
 
 const permissionsPrimitives: Omit<
-  PermissionPrimitive,
+  PermissionAttributes,
   'id' | 'createdAt' | 'updatedAt'
 >[] = [
   {
-    code: 'global.permissions.create',
+    code: GlobalPermissionCode.CREATE_PERMISSION,
     name: 'Create Global Permission',
   },
   {
-    code: 'global.permissions.read',
+    code: GlobalPermissionCode.READ_PERMISSION,
     name: 'Read Global Permission',
   },
   {
-    code: 'global.roles.create',
+    code: GlobalPermissionCode.CREATE_ROLE,
     name: 'Create Global Role',
   },
   {
-    code: 'global.roles.read',
+    code: GlobalPermissionCode.READ_ROLE,
     name: 'Read Global Role',
   },
   {
-    code: 'global.roles.update',
+    code: GlobalPermissionCode.UPDATE_ROLE,
     name: 'Update Global Role',
   },
   {
-    code: 'global.roles.delete',
+    code: GlobalPermissionCode.DELETE_ROLE,
     name: 'Delete Global Role',
   },
   {
-    code: 'global.accounts.deactivate',
+    code: GlobalPermissionCode.READ_ACCOUNT,
     name: 'Deactivate User Account',
   },
   {
-    code: 'global.accounts.read',
+    code: GlobalPermissionCode.UPDATE_ACCOUNT,
     name: 'Read User Accounts',
   },
   {
-    code: 'global.accounts.update',
+    code: GlobalPermissionCode.DELETE_ACCOUNT,
     name: 'Update User Accounts',
   },
 ];
@@ -56,26 +57,28 @@ const permissionsPrimitives: Omit<
 // eslint-disable-next-line @typescript-eslint/unbound-method
 const permissionsSeedData = permissionsPrimitives.map(Permission.create);
 
-const rolePrimitives: Omit<RolePrimitive, 'id'>[] = [
-  {
-    code: 'creator',
-    name: 'Creator',
-    permissions: permissionsSeedData.map((permission) =>
-      permission.toPrimitive(),
-    ),
-  },
-];
+const rolePrimitives: Omit<RoleAttributes, 'id' | 'createdAt' | 'updatedAt'>[] =
+  [
+    {
+      code: 'creator',
+      name: 'Creator',
+      permissions: permissionsSeedData,
+    },
+  ];
 
 // eslint-disable-next-line @typescript-eslint/unbound-method
 const rolesSeedData = rolePrimitives.map(Role.create);
 
-const userAccountPrimitives: Omit<UserAccountPrimitive, 'id'>[] = [
+const userAccountPrimitives: Omit<
+  UserAccountAttributes,
+  'id' | 'createdAt' | 'updatedAt'
+>[] = [
   {
     username: process.env.CREATOR_USERNAME ?? '',
     email: process.env.CREATOR_EMAIL ?? '',
     password: bcrypt.hashSync(process.env.CREATOR_PASSWORD ?? '', 10),
     active: true,
-    roles: rolesSeedData.map((role) => role.toPrimitive()),
+    roles: rolesSeedData,
   },
 ];
 

@@ -1,24 +1,24 @@
 import { Injectable } from '@nestjs/common';
-import { Role, RolePrimitive } from '../../domain/Role';
+import { Role, RoleAttributes } from '../../domain/Role';
 import { RoleRepository } from '../../domain/RoleRepository';
 
 @Injectable()
 export class MemoryRoleRepository implements RoleRepository {
-  private roles: RolePrimitive[] = [];
+  private roles: Role[] = [];
 
   async create(role: Role): Promise<Role> {
-    this.roles.push(role.toPrimitive());
+    this.roles.push(role);
     return Promise.resolve(role);
   }
 
-  async findByCode(code: RolePrimitive['code']): Promise<Role | null> {
+  async findByCode(code: RoleAttributes['code']): Promise<Role | null> {
     const foundRole = this.roles.find((role) => role.code === code);
-    const role = foundRole ? Role.create(foundRole) : null;
+    const role = foundRole ? foundRole : null;
     return Promise.resolve(role);
   }
 
   async findAll(): Promise<Role[]> {
-    const foundRoles = this.roles.map((role) => Role.create(role));
+    const foundRoles = this.roles;
     return Promise.resolve(foundRoles);
   }
 }

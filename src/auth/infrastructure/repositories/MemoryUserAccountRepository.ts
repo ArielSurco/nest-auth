@@ -4,10 +4,10 @@ import { UserAccountRepository } from '../../domain/UserAccountRepository';
 
 @Injectable()
 export class MemoryUserAccountRepository implements UserAccountRepository {
-  private userAccounts: UserAccountPrimitive[] = [];
+  private userAccounts: UserAccount[] = [];
 
   async create(userAccount: UserAccount): Promise<UserAccount> {
-    this.userAccounts.push(userAccount.toPrimitive());
+    this.userAccounts.push(userAccount);
 
     return Promise.resolve(userAccount);
   }
@@ -16,9 +16,7 @@ export class MemoryUserAccountRepository implements UserAccountRepository {
     const foundUserAccount = this.userAccounts.find(
       (userAccount) => userAccount.id === id,
     );
-    return Promise.resolve(
-      foundUserAccount ? UserAccount.create(foundUserAccount) : null,
-    );
+    return Promise.resolve(foundUserAccount ? foundUserAccount : null);
   }
 
   async findByEmailOrUsername({
@@ -33,9 +31,7 @@ export class MemoryUserAccountRepository implements UserAccountRepository {
         userAccount.email === email || userAccount.username === username,
     );
 
-    const userAccount = foundUserAccount
-      ? UserAccount.create(foundUserAccount)
-      : null;
+    const userAccount = foundUserAccount ? foundUserAccount : null;
 
     return Promise.resolve(userAccount);
   }

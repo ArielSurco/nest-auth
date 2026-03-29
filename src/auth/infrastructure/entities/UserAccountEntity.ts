@@ -1,3 +1,4 @@
+import { UserAccount } from 'src/auth/domain/UserAccount';
 import {
   Column,
   CreateDateColumn,
@@ -50,4 +51,35 @@ export class UserAccountEntity {
 
   @DeleteDateColumn({ name: 'deleted_at' })
   deletedAt?: Date;
+
+  toDomain(): UserAccount {
+    return UserAccount.create({
+      id: this.id,
+      username: this.username,
+      email: this.email,
+      password: this.password,
+      active: this.active,
+      roles: this.roles.map((role) => role.toDomain()),
+      createdAt: this.createdAt,
+      updatedAt: this.updatedAt,
+    });
+  }
+
+  static fromDomain(userAccount: UserAccount): UserAccountEntity {
+    const userAccountEntity = new UserAccountEntity();
+    const userAccountPrimitive = userAccount.toPrimitive();
+
+    userAccountEntity.id = userAccountPrimitive.id;
+    userAccountEntity.username = userAccountPrimitive.username;
+    userAccountEntity.email = userAccountPrimitive.email;
+    userAccountEntity.password = userAccountPrimitive.password;
+    userAccountEntity.active = userAccountPrimitive.active;
+    userAccountEntity.roles = userAccount.roles.map((role) =>
+      RoleEntity.fromDomain(role),
+    );
+    userAccountEntity.createdAt = new Date(userAccountPrimitive.createdAt);
+    userAccountEntity.updatedAt = new Date(userAccountPrimitive.updatedAt);
+
+    return userAccountEntity;
+  }
 }

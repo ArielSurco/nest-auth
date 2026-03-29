@@ -29,7 +29,7 @@ export class CreateRole {
     const role = Role.create({
       code,
       name,
-      permissions: permissions.map((permission) => permission.toPrimitive()),
+      permissions,
     });
 
     const createdRole = await this.roleRepository.create(role);
