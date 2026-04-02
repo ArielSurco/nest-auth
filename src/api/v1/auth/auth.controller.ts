@@ -10,17 +10,17 @@ import {
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
-import { GetUserById } from '../../auth/application/getUserById';
-import { SignUp } from '../../auth/application/signUp';
-import { Session } from '../../auth/infrastructure/decorators/session.decorator';
-import { AuthGuard } from '../../auth/infrastructure/guards/auth.guard';
+import { GetUserById } from '../../../auth/application/getUserById';
+import { SignUp } from '../../../auth/application/signUp';
+import { Session } from '../../../auth/infrastructure/decorators/session.decorator';
+import { AuthGuard } from '../../../auth/infrastructure/guards/auth.guard';
 import {
   SessionPayload,
   SessionService,
-} from '../../auth/infrastructure/services/session.service';
-import { GetUserByCredentials } from '../../auth/application/getUserByCredentials';
-import { SignInDto } from './dtos/SignInDto';
-import { SignUpDto } from './dtos/SignUpDto';
+} from '../../../auth/infrastructure/services/session.service';
+import { GetUserByCredentials } from '../../../auth/application/getUserByCredentials';
+import { SignInDto } from './SignInDto';
+import { SignUpDto } from './SignUpDto';
 
 @Controller('v1/auth')
 export class AuthController {

@@ -10,11 +10,11 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 import { GlobalPermissionCode } from 'src/permissions/domain/GlobalPermissionCode';
-import { CreatePermission } from '../../permissions/application/createPermission';
-import { GetAllPermissions } from '../../permissions/application/getAllPermissions';
-import { Permissions } from '../../auth/infrastructure/decorators/permission.decorator';
-import { AuthGuard } from '../../auth/infrastructure/guards/auth.guard';
-import { CreatePermissionDto } from './dtos/CreatePermissionDto';
+import { CreatePermission } from '../../../permissions/application/createPermission';
+import { GetAllPermissions } from '../../../permissions/application/getAllPermissions';
+import { Permissions } from '../../../auth/infrastructure/decorators/permission.decorator';
+import { AuthGuard } from '../../../auth/infrastructure/guards/auth.guard';
+import { CreatePermissionDto } from './CreatePermissionDto';
 
 @Controller('v1/permission')
 export class PermissionController {

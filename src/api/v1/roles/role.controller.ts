@@ -10,11 +10,11 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 import { GlobalPermissionCode } from 'src/permissions/domain/GlobalPermissionCode';
-import { CreateRole } from '../../roles/application/createRole';
-import { GetAllRoles } from '../../roles/application/getAllRoles';
-import { Permissions } from '../../auth/infrastructure/decorators/permission.decorator';
-import { AuthGuard } from '../../auth/infrastructure/guards/auth.guard';
-import { CreateRoleDto } from './dtos/CreateRoleDto';
+import { CreateRole } from '../../../roles/application/createRole';
+import { GetAllRoles } from '../../../roles/application/getAllRoles';
+import { Permissions } from '../../../auth/infrastructure/decorators/permission.decorator';
+import { AuthGuard } from '../../../auth/infrastructure/guards/auth.guard';
+import { CreateRoleDto } from './CreateRoleDto';
 
 @Controller('v1/role')
 export class RoleController {

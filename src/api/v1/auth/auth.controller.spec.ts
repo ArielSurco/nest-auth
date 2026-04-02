@@ -2,13 +2,13 @@ import { BadRequestException, UnauthorizedException } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { Test, TestingModule } from '@nestjs/testing';
-import { SessionPayload } from '../../auth/infrastructure/services/session.service';
-import { GetUserByCredentials } from '../../auth/application/getUserByCredentials';
-import { GetUserById } from '../../auth/application/getUserById';
-import { SignUp } from '../../auth/application/signUp';
-import { UserAccountRepository } from '../../users/domain/UserAccountRepository';
-import { MemoryUserAccountRepository } from '../../users/infrastructure/repositories/MemoryUserAccountRepository';
-import { SessionService } from '../../auth/infrastructure/services/session.service';
+import { SessionPayload } from '../../../auth/infrastructure/services/session.service';
+import { GetUserByCredentials } from '../../../auth/application/getUserByCredentials';
+import { GetUserById } from '../../../auth/application/getUserById';
+import { SignUp } from '../../../auth/application/signUp';
+import { UserAccountRepository } from '../../../users/domain/UserAccountRepository';
+import { MemoryUserAccountRepository } from '../../../users/infrastructure/repositories/MemoryUserAccountRepository';
+import { SessionService } from '../../../auth/infrastructure/services/session.service';
 import { AuthController } from './auth.controller';
 
 describe('AuthController', () => {
