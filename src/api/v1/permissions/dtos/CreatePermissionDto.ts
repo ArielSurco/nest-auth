@@ -4,7 +4,8 @@ export class CreatePermissionDto {
   @IsString()
   @IsNotEmpty()
   @Matches(/^[a-z]+(\.[a-z]+)*$/, {
-    message: 'Code must be in lowercase dot-separated format (e.g. global.permissions.create)',
+    message:
+      'Code must be in lowercase dot-separated format (e.g. global.permissions.create)',
   })
   code: string;
 

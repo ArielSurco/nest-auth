@@ -10,7 +10,8 @@ export class CreateRoleDto {
   @IsString()
   @IsNotEmpty()
   @Matches(/^[a-z]+(\.[a-z]+)*$/, {
-    message: 'Code must be in lowercase dot-separated format (e.g. global.roles.admin)',
+    message:
+      'Code must be in lowercase dot-separated format (e.g. global.roles.admin)',
   })
   code: string;
 
