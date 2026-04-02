@@ -14,7 +14,7 @@ import { CreatePermission } from '../../../permissions/application/createPermiss
 import { GetAllPermissions } from '../../../permissions/application/getAllPermissions';
 import { Permissions } from '../../../auth/infrastructure/decorators/permission.decorator';
 import { AuthGuard } from '../../../auth/infrastructure/guards/auth.guard';
-import { CreatePermissionDto } from './CreatePermissionDto';
+import { CreatePermissionDto } from './dtos/CreatePermissionDto';
 
 @Controller('v1/permission')
 export class PermissionController {

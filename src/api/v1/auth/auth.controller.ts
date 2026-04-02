@@ -19,8 +19,8 @@ import {
   SessionService,
 } from '../../../auth/infrastructure/services/session.service';
 import { GetUserByCredentials } from '../../../auth/application/getUserByCredentials';
-import { SignInDto } from './SignInDto';
-import { SignUpDto } from './SignUpDto';
+import { SignInDto } from './dtos/SignInDto';
+import { SignUpDto } from './dtos/SignUpDto';
 
 @Controller('v1/auth')
 export class AuthController {
