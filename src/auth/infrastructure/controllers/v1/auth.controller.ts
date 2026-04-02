@@ -61,7 +61,9 @@ export class AuthController {
   @HttpCode(HttpStatus.OK)
   @UseGuards(AuthGuard)
   async me(@Session() session: SessionPayload) {
-    const userAccount = await this.getUserByIdUseCase.execute(session?.userId ?? '');
+    const userAccount = await this.getUserByIdUseCase.execute(
+      session?.userId ?? '',
+    );
     const accountPrimitive = userAccount.toPrimitive();
     return {
       id: accountPrimitive.id,
