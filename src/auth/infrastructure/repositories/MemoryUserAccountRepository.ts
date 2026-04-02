@@ -20,10 +20,16 @@ export class MemoryUserAccountRepository implements UserAccountRepository {
   }
 
   async findByEmail(email: string): Promise<UserAccount | null> {
-    return this.userAccounts.find(u => u.email === email) ?? null;
+    const foundUserAccount = this.userAccounts.find(
+      (userAccount) => userAccount.email === email,
+    );
+    return Promise.resolve(foundUserAccount ? foundUserAccount : null);
   }
 
   async findByUsername(username: string): Promise<UserAccount | null> {
-    return this.userAccounts.find(u => u.username === username) ?? null;
+    const foundUserAccount = this.userAccounts.find(
+      (userAccount) => userAccount.username === username,
+    );
+    return Promise.resolve(foundUserAccount ? foundUserAccount : null);
   }
 }
