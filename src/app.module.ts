@@ -5,6 +5,8 @@ import 'dotenv/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
+import { PermissionsModule } from './auth/permissions/permissions.module';
+import { RolesModule } from './auth/roles/roles.module';
 import { DataSourceOptions } from './db/migrations.data-source';
 
 @Module({
@@ -15,6 +17,8 @@ import { DataSourceOptions } from './db/migrations.data-source';
     }),
     TypeOrmModule.forRoot(DataSourceOptions),
     AuthModule,
+    PermissionsModule,
+    RolesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

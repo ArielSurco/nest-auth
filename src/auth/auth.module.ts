@@ -4,11 +4,10 @@ import { JwtModule } from '@nestjs/jwt';
 import { GetUserByCredentials } from './application/getUserByCredentials';
 import { GetUserById } from './application/getUserById';
 import { SignUp } from './application/signUp';
-import { UserAccountRepository } from './users/domain/UserAccountRepository';
 import { AuthController } from './infrastructure/controllers/v1/auth.controller';
 import { AuthGuard } from './infrastructure/guards/auth.guard';
-import { PgUserAccountRepository } from './users/infrastructure/repositories/PgUserAccountRepository';
 import { SessionService } from './infrastructure/services/session.service';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -20,19 +19,10 @@ import { SessionService } from './infrastructure/services/session.service';
       }),
       inject: [ConfigService],
     }),
+    UsersModule,
   ],
   controllers: [AuthController],
-  providers: [
-    {
-      provide: UserAccountRepository,
-      useClass: PgUserAccountRepository,
-    },
-    SignUp,
-    GetUserByCredentials,
-    GetUserById,
-    SessionService,
-    AuthGuard,
-  ],
-  exports: [UserAccountRepository, AuthGuard, SessionService],
+  providers: [SignUp, GetUserByCredentials, GetUserById, SessionService, AuthGuard],
+  exports: [AuthGuard, SessionService],
 })
 export class AuthModule {}
