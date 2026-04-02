@@ -1,4 +1,4 @@
-import { Role } from 'src/auth/domain/Role';
+import { Role } from 'src/auth/roles/domain/Role';
 import {
   Column,
   CreateDateColumn,
@@ -8,7 +8,7 @@ import {
   PrimaryColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { PermissionEntity } from '../../permissions/infrastructure/entities/PermissionEntity';
+import { PermissionEntity } from '../../../permissions/infrastructure/entities/PermissionEntity';
 
 @Entity('role')
 export class RoleEntity {

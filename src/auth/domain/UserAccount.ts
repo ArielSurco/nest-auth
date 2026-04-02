@@ -1,7 +1,7 @@
 import { CustomPartial } from 'src/shared/types/CustomPartial';
 import { v4 as uuidv4 } from 'uuid';
 import { PermissionAttributes } from '../permissions/domain/Permission';
-import { Role, RolePrimitive } from './Role';
+import { Role, RolePrimitive } from '../roles/domain/Role';
 
 export interface UserAccountAttributes {
   id: string;

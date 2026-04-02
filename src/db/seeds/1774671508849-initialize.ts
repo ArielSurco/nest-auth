@@ -3,13 +3,13 @@ import 'dotenv/config';
 import { In, MigrationInterface, QueryRunner } from 'typeorm';
 import { GlobalPermissionCode } from '../../auth/permissions/domain/GlobalPermissionCode';
 import { Permission, PermissionAttributes } from '../../auth/permissions/domain/Permission';
-import { Role, RoleAttributes } from '../../auth/domain/Role';
+import { Role, RoleAttributes } from '../../auth/roles/domain/Role';
 import {
   UserAccount,
   UserAccountAttributes,
 } from '../../auth/domain/UserAccount';
 import { PermissionEntity } from '../../auth/permissions/infrastructure/entities/PermissionEntity';
-import { RoleEntity } from '../../auth/infrastructure/entities/RoleEntity';
+import { RoleEntity } from '../../auth/roles/infrastructure/entities/RoleEntity';
 import { UserAccountEntity } from '../../auth/infrastructure/entities/UserAccountEntity';
 
 const permissionsPrimitives: Omit<

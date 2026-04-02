@@ -9,7 +9,7 @@ import {
   PrimaryColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { RoleEntity } from './RoleEntity';
+import { RoleEntity } from '../../roles/infrastructure/entities/RoleEntity';
 
 @Entity('user_account')
 export class UserAccountEntity {

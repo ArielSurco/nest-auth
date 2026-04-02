@@ -12,8 +12,8 @@ import {
 import { GlobalPermissionCode } from 'src/auth/permissions/domain/GlobalPermissionCode';
 import { CreateRole } from '../../../application/createRole';
 import { GetAllRoles } from '../../../application/getAllRoles';
-import { Permissions } from '../../decorators/permission.decorator';
-import { AuthGuard } from '../../guards/auth.guard';
+import { Permissions } from '../../../../infrastructure/decorators/permission.decorator';
+import { AuthGuard } from '../../../../infrastructure/guards/auth.guard';
 import { CreateRoleDto } from './dtos/CreateRoleDto';
 
 @Controller('v1/role')
