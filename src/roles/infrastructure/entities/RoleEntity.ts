@@ -1,4 +1,4 @@
-import { Role } from 'src/auth/roles/domain/Role';
+import { Role } from 'src/roles/domain/Role';
 import {
   Column,
   CreateDateColumn,

@@ -1,4 +1,4 @@
-import { UserAccount } from 'src/auth/users/domain/UserAccount';
+import { UserAccount } from 'src/users/domain/UserAccount';
 import {
   Column,
   CreateDateColumn,

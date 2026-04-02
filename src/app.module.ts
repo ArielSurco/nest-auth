@@ -5,8 +5,8 @@ import 'dotenv/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
-import { PermissionsModule } from './auth/permissions/permissions.module';
-import { RolesModule } from './auth/roles/roles.module';
+import { PermissionsModule } from './permissions/permissions.module';
+import { RolesModule } from './roles/roles.module';
 import { DataSourceOptions } from './db/migrations.data-source';
 
 @Module({

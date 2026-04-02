@@ -6,7 +6,7 @@ import { Permission } from '../../../../permissions/domain/Permission';
 import { PermissionRepository } from '../../../../permissions/domain/PermissionRepository';
 import { RoleRepository } from '../../../domain/RoleRepository';
 import { MemoryPermissionRepository } from '../../../../permissions/infrastructure/repositories/MemoryPermissionRepository';
-import { AuthGuard } from '../../../../infrastructure/guards/auth.guard';
+import { AuthGuard } from '../../../../auth/infrastructure/guards/auth.guard';
 import { MemoryRoleRepository } from '../../repositories/MemoryRoleRepository';
 import { RoleController } from './role.controller';
 

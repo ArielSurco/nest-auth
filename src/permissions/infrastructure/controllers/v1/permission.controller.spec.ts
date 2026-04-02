@@ -5,7 +5,7 @@ import { CreatePermission } from '../../../application/createPermission';
 import { GetAllPermissions } from '../../../application/getAllPermissions';
 import { PermissionRepository } from '../../../domain/PermissionRepository';
 import { MemoryPermissionRepository } from '../../../infrastructure/repositories/MemoryPermissionRepository';
-import { AuthGuard } from '../../../../infrastructure/guards/auth.guard';
+import { AuthGuard } from '../../../../auth/infrastructure/guards/auth.guard';
 import { PermissionController } from './permission.controller';
 
 describe('PermissionController', () => {

@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { AuthModule } from '../auth.module';
+import { AuthModule } from '../auth/auth.module';
 import { PermissionsModule } from '../permissions/permissions.module';
 import { CreateRole } from './application/createRole';
 import { GetAllRoles } from './application/getAllRoles';

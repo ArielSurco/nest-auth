@@ -1,16 +1,19 @@
 import * as bcrypt from 'bcrypt';
 import 'dotenv/config';
 import { In, MigrationInterface, QueryRunner } from 'typeorm';
-import { GlobalPermissionCode } from '../../auth/permissions/domain/GlobalPermissionCode';
-import { Permission, PermissionAttributes } from '../../auth/permissions/domain/Permission';
-import { Role, RoleAttributes } from '../../auth/roles/domain/Role';
+import { GlobalPermissionCode } from '../../permissions/domain/GlobalPermissionCode';
+import {
+  Permission,
+  PermissionAttributes,
+} from '../../permissions/domain/Permission';
+import { Role, RoleAttributes } from '../../roles/domain/Role';
 import {
   UserAccount,
   UserAccountAttributes,
-} from '../../auth/users/domain/UserAccount';
-import { PermissionEntity } from '../../auth/permissions/infrastructure/entities/PermissionEntity';
-import { RoleEntity } from '../../auth/roles/infrastructure/entities/RoleEntity';
-import { UserAccountEntity } from '../../auth/users/infrastructure/entities/UserAccountEntity';
+} from '../../users/domain/UserAccount';
+import { PermissionEntity } from '../../permissions/infrastructure/entities/PermissionEntity';
+import { RoleEntity } from '../../roles/infrastructure/entities/RoleEntity';
+import { UserAccountEntity } from '../../users/infrastructure/entities/UserAccountEntity';
 
 const permissionsPrimitives: Omit<
   PermissionAttributes,

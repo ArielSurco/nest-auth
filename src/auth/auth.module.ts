@@ -7,7 +7,7 @@ import { SignUp } from './application/signUp';
 import { AuthController } from './infrastructure/controllers/v1/auth.controller';
 import { AuthGuard } from './infrastructure/guards/auth.guard';
 import { SessionService } from './infrastructure/services/session.service';
-import { UsersModule } from './users/users.module';
+import { UsersModule } from '../users/users.module';
 
 @Module({
   imports: [
@@ -22,7 +22,13 @@ import { UsersModule } from './users/users.module';
     UsersModule,
   ],
   controllers: [AuthController],
-  providers: [SignUp, GetUserByCredentials, GetUserById, SessionService, AuthGuard],
+  providers: [
+    SignUp,
+    GetUserByCredentials,
+    GetUserById,
+    SessionService,
+    AuthGuard,
+  ],
   exports: [AuthGuard, SessionService],
 })
 export class AuthModule {}

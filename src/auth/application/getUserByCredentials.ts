@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
-import { UserAccount, UserAccountPrimitive } from '../users/domain/UserAccount';
-import { UserAccountRepository } from '../users/domain/UserAccountRepository';
+import { UserAccount, UserAccountPrimitive } from '../../users/domain/UserAccount';
+import { UserAccountRepository } from '../../users/domain/UserAccountRepository';
 
 @Injectable()
 export class GetUserByCredentials {

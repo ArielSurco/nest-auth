@@ -6,8 +6,8 @@ import { SessionPayload } from '../../services/session.service';
 import { GetUserByCredentials } from '../../../application/getUserByCredentials';
 import { GetUserById } from '../../../application/getUserById';
 import { SignUp } from '../../../application/signUp';
-import { UserAccountRepository } from '../../../users/domain/UserAccountRepository';
-import { MemoryUserAccountRepository } from '../../../users/infrastructure/repositories/MemoryUserAccountRepository';
+import { UserAccountRepository } from '../../../../users/domain/UserAccountRepository';
+import { MemoryUserAccountRepository } from '../../../../users/infrastructure/repositories/MemoryUserAccountRepository';
 import { SessionService } from '../../services/session.service';
 import { AuthController } from './auth.controller';
 

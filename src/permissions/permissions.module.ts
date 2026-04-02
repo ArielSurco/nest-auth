@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { AuthModule } from '../auth.module';
+import { AuthModule } from '../auth/auth.module';
 import { CreatePermission } from './application/createPermission';
 import { GetAllPermissions } from './application/getAllPermissions';
 import { PermissionRepository } from './domain/PermissionRepository';

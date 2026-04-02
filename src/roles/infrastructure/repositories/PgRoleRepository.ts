@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectDataSource } from '@nestjs/typeorm';
-import { Role, RolePrimitive } from 'src/auth/roles/domain/Role';
-import { RoleRepository } from 'src/auth/roles/domain/RoleRepository';
+import { Role, RolePrimitive } from 'src/roles/domain/Role';
+import { RoleRepository } from 'src/roles/domain/RoleRepository';
 import { DataSource } from 'typeorm';
 import { RoleEntity } from '../entities/RoleEntity';
 
