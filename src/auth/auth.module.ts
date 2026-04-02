@@ -6,6 +6,7 @@ import { CreateRole } from './application/createRole';
 import { GetAllPermissions } from './application/getAllPermissions';
 import { GetAllRoles } from './application/getAllRoles';
 import { GetUserByCredentials } from './application/getUserByCredentials';
+import { GetUserById } from './application/getUserById';
 import { SignUp } from './application/signUp';
 import { PermissionRepository } from './domain/PermissionRepository';
 import { RoleRepository } from './domain/RoleRepository';
@@ -38,6 +39,7 @@ import { SessionService } from './infrastructure/services/session.service';
     },
     SignUp,
     GetUserByCredentials,
+    GetUserById,
     CreatePermission,
     GetAllPermissions,
     {

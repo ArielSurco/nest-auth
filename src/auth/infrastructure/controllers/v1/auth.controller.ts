@@ -10,8 +10,8 @@ import {
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
+import { GetUserById } from '../../../application/getUserById';
 import { SignUp } from '../../../application/signUp';
-import { UserAccountRepository } from '../../../domain/UserAccountRepository';
 import { Session } from '../../decorators/session.decorator';
 import { AuthGuard } from '../../guards/auth.guard';
 import { SessionPayload, SessionService } from '../../services/session.service';
@@ -25,7 +25,7 @@ export class AuthController {
     private readonly signUpUseCase: SignUp,
     private readonly getUserByCredentialsUseCase: GetUserByCredentials,
     private readonly sessionService: SessionService,
-    private readonly userAccountRepository: UserAccountRepository,
+    private readonly getUserByIdUseCase: GetUserById,
   ) {}
 
   @Post('sign-up')
@@ -61,16 +61,8 @@ export class AuthController {
   @HttpCode(HttpStatus.OK)
   @UseGuards(AuthGuard)
   async me(@Session() session: SessionPayload) {
-    const userAccount = await this.userAccountRepository.findById(
-      session?.userId ?? '',
-    );
-
-    if (!userAccount) {
-      throw new UnauthorizedException();
-    }
-
+    const userAccount = await this.getUserByIdUseCase.execute(session?.userId ?? '');
     const accountPrimitive = userAccount.toPrimitive();
-
     return {
       id: accountPrimitive.id,
       username: accountPrimitive.username,

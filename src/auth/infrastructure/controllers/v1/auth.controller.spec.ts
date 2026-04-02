@@ -2,7 +2,9 @@ import { BadRequestException, UnauthorizedException } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { Test, TestingModule } from '@nestjs/testing';
+import { SessionPayload } from '../../services/session.service';
 import { GetUserByCredentials } from '../../../application/getUserByCredentials';
+import { GetUserById } from '../../../application/getUserById';
 import { SignUp } from '../../../application/signUp';
 import { UserAccountRepository } from '../../../domain/UserAccountRepository';
 import { MemoryUserAccountRepository } from '../../repositories/MemoryUserAccountRepository';
@@ -53,6 +55,7 @@ describe('AuthController', () => {
         SessionService,
         SignUp,
         GetUserByCredentials,
+        GetUserById,
       ],
     }).compile();
 
@@ -129,6 +132,26 @@ describe('AuthController', () => {
         expect(error).toBeInstanceOf(UnauthorizedException);
         expect((error as Error).message).toBe('Invalid credentials');
       }
+    });
+  });
+
+  describe('me', () => {
+    it('should return user data when session is valid', async () => {
+      const { id } = await authController.signUp(defaultPayload);
+
+      const result = await authController.me({ userId: id } as SessionPayload);
+
+      expect(result).toEqual({
+        id,
+        username: defaultPayload.username,
+        email: defaultPayload.email,
+      });
+    });
+
+    it('should throw UnauthorizedException when userId does not exist', async () => {
+      await expect(
+        authController.me({ userId: 'non-existent-id' } as SessionPayload),
+      ).rejects.toThrow(UnauthorizedException);
     });
   });
 });
