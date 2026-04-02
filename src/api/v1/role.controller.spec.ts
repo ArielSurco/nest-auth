@@ -1,13 +1,13 @@
 import { BadRequestException } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
-import { CreateRole } from '../../../application/createRole';
-import { GetAllRoles } from '../../../application/getAllRoles';
-import { Permission } from '../../../../permissions/domain/Permission';
-import { PermissionRepository } from '../../../../permissions/domain/PermissionRepository';
-import { RoleRepository } from '../../../domain/RoleRepository';
-import { MemoryPermissionRepository } from '../../../../permissions/infrastructure/repositories/MemoryPermissionRepository';
-import { AuthGuard } from '../../../../auth/infrastructure/guards/auth.guard';
-import { MemoryRoleRepository } from '../../repositories/MemoryRoleRepository';
+import { CreateRole } from '../../roles/application/createRole';
+import { GetAllRoles } from '../../roles/application/getAllRoles';
+import { Permission } from '../../permissions/domain/Permission';
+import { PermissionRepository } from '../../permissions/domain/PermissionRepository';
+import { RoleRepository } from '../../roles/domain/RoleRepository';
+import { MemoryPermissionRepository } from '../../permissions/infrastructure/repositories/MemoryPermissionRepository';
+import { AuthGuard } from '../../auth/infrastructure/guards/auth.guard';
+import { MemoryRoleRepository } from '../../roles/infrastructure/repositories/MemoryRoleRepository';
 import { RoleController } from './role.controller';
 
 describe('RoleController', () => {

@@ -4,9 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import 'dotenv/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { AuthModule } from './auth/auth.module';
-import { PermissionsModule } from './permissions/permissions.module';
-import { RolesModule } from './roles/roles.module';
+import { ApiModule } from './api/api.module';
 import { DataSourceOptions } from './db/migrations.data-source';
 
 @Module({
@@ -16,9 +14,7 @@ import { DataSourceOptions } from './db/migrations.data-source';
       isGlobal: true,
     }),
     TypeOrmModule.forRoot(DataSourceOptions),
-    AuthModule,
-    PermissionsModule,
-    RolesModule,
+    ApiModule,
   ],
   controllers: [AppController],
   providers: [AppService],

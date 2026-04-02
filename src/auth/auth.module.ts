@@ -4,7 +4,6 @@ import { JwtModule } from '@nestjs/jwt';
 import { GetUserByCredentials } from './application/getUserByCredentials';
 import { GetUserById } from './application/getUserById';
 import { SignUp } from './application/signUp';
-import { AuthController } from './infrastructure/controllers/v1/auth.controller';
 import { AuthGuard } from './infrastructure/guards/auth.guard';
 import { SessionService } from './infrastructure/services/session.service';
 import { UsersModule } from '../users/users.module';
@@ -21,7 +20,7 @@ import { UsersModule } from '../users/users.module';
     }),
     UsersModule,
   ],
-  controllers: [AuthController],
+  controllers: [],
   providers: [
     SignUp,
     GetUserByCredentials,
@@ -29,6 +28,13 @@ import { UsersModule } from '../users/users.module';
     SessionService,
     AuthGuard,
   ],
-  exports: [AuthGuard, SessionService, UsersModule],
+  exports: [
+    AuthGuard,
+    SessionService,
+    UsersModule,
+    SignUp,
+    GetUserByCredentials,
+    GetUserById,
+  ],
 })
 export class AuthModule {}

@@ -4,12 +4,11 @@ import { PermissionsModule } from '../permissions/permissions.module';
 import { CreateRole } from './application/createRole';
 import { GetAllRoles } from './application/getAllRoles';
 import { RoleRepository } from './domain/RoleRepository';
-import { RoleController } from './infrastructure/controllers/v1/role.controller';
 import { PgRoleRepository } from './infrastructure/repositories/PgRoleRepository';
 
 @Module({
   imports: [AuthModule, PermissionsModule],
-  controllers: [RoleController],
+  controllers: [],
   providers: [
     CreateRole,
     GetAllRoles,
@@ -18,6 +17,6 @@ import { PgRoleRepository } from './infrastructure/repositories/PgRoleRepository
       useClass: PgRoleRepository,
     },
   ],
-  exports: [RoleRepository],
+  exports: [RoleRepository, CreateRole, GetAllRoles],
 })
 export class RolesModule {}

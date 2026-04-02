@@ -1,11 +1,11 @@
 import { BadRequestException } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { Test, TestingModule } from '@nestjs/testing';
-import { CreatePermission } from '../../../application/createPermission';
-import { GetAllPermissions } from '../../../application/getAllPermissions';
-import { PermissionRepository } from '../../../domain/PermissionRepository';
-import { MemoryPermissionRepository } from '../../../infrastructure/repositories/MemoryPermissionRepository';
-import { AuthGuard } from '../../../../auth/infrastructure/guards/auth.guard';
+import { CreatePermission } from '../../permissions/application/createPermission';
+import { GetAllPermissions } from '../../permissions/application/getAllPermissions';
+import { PermissionRepository } from '../../permissions/domain/PermissionRepository';
+import { MemoryPermissionRepository } from '../../permissions/infrastructure/repositories/MemoryPermissionRepository';
+import { AuthGuard } from '../../auth/infrastructure/guards/auth.guard';
 import { PermissionController } from './permission.controller';
 
 describe('PermissionController', () => {
