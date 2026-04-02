@@ -9,8 +9,8 @@ import {
 export class CreateRoleDto {
   @IsString()
   @IsNotEmpty()
-  @Matches(/^[A-Z_]+$/, {
-    message: 'Code must be in uppercase and underscore separated',
+  @Matches(/^[a-z]+(\.[a-z]+)*$/, {
+    message: 'Code must be in lowercase dot-separated format (e.g. global.roles.admin)',
   })
   code: string;
 
