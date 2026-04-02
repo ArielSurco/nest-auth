@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectDataSource } from '@nestjs/typeorm';
 import { DataSource } from 'typeorm';
-import { UserAccount, UserAccountAttributes } from '../../domain/UserAccount';
+import { UserAccount } from '../../domain/UserAccount';
 import { UserAccountRepository } from '../../domain/UserAccountRepository';
 import { UserAccountEntity } from '../entities/UserAccountEntity';
 
@@ -25,22 +25,17 @@ export class PgUserAccountRepository implements UserAccountRepository {
     return foundUserAccount?.toDomain() ?? null;
   }
 
-  async findByEmailOrUsername({
-    email,
-    username,
-  }: Pick<
-    UserAccountAttributes,
-    'email' | 'username'
-  >): Promise<UserAccount | null> {
-    const foundUserAccount = await this.dataSource
+  async findByEmail(email: string): Promise<UserAccount | null> {
+    const found = await this.dataSource
       .getRepository(UserAccountEntity)
-      .findOne({
-        where: {
-          email,
-          username,
-        },
-      });
+      .findOne({ where: { email } });
+    return found?.toDomain() ?? null;
+  }
 
-    return foundUserAccount?.toDomain() ?? null;
+  async findByUsername(username: string): Promise<UserAccount | null> {
+    const found = await this.dataSource
+      .getRepository(UserAccountEntity)
+      .findOne({ where: { username } });
+    return found?.toDomain() ?? null;
   }
 }

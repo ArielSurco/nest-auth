@@ -14,9 +14,7 @@ export class GetUserByCredentials {
     UserAccountPrimitive,
     'email' | 'password'
   >): Promise<UserAccount | null> {
-    const userAccount = await this.userAccountRepository.findByEmailOrUsername({
-      email,
-    });
+    const userAccount = await this.userAccountRepository.findByEmail(email);
 
     if (!userAccount) return null;
 

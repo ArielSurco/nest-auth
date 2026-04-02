@@ -17,15 +17,9 @@ export class SignUp {
   >): Promise<UserAccount> {
     const encryptedPassword = await bcrypt.hash(password, 10);
 
-    const existingUserAccount =
-      await this.userAccountRepository.findByEmailOrUsername({
-        email,
-        username,
-      });
-
-    if (existingUserAccount) {
-      throw new BadRequestException('User already exists');
-    }
+    const existingByEmail = await this.userAccountRepository.findByEmail(email);
+    const existingByUsername = await this.userAccountRepository.findByUsername(username);
+    if (existingByEmail || existingByUsername) throw new BadRequestException('User already exists');
 
     const userAccount = UserAccount.create({
       username,

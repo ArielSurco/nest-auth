@@ -67,10 +67,7 @@ describe('AuthController', () => {
     it('should create a new user account when payload is valid', async () => {
       const response = await authController.signUp(defaultPayload);
       const createdUserAccount =
-        await userAccountRepository.findByEmailOrUsername({
-          email: defaultPayload.email,
-          username: defaultPayload.username,
-        });
+        await userAccountRepository.findByEmail(defaultPayload.email);
 
       expect(response.id).toBeDefined();
       expect(createdUserAccount?.toPrimitive()).toEqual(

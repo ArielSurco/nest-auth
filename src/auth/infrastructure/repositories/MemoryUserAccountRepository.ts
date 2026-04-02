@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { UserAccount, UserAccountPrimitive } from '../../domain/UserAccount';
+import { UserAccount } from '../../domain/UserAccount';
 import { UserAccountRepository } from '../../domain/UserAccountRepository';
 
 @Injectable()
@@ -19,20 +19,11 @@ export class MemoryUserAccountRepository implements UserAccountRepository {
     return Promise.resolve(foundUserAccount ? foundUserAccount : null);
   }
 
-  async findByEmailOrUsername({
-    email,
-    username,
-  }: Pick<
-    UserAccountPrimitive,
-    'email' | 'username'
-  >): Promise<UserAccount | null> {
-    const foundUserAccount = this.userAccounts.find(
-      (userAccount) =>
-        userAccount.email === email || userAccount.username === username,
-    );
+  async findByEmail(email: string): Promise<UserAccount | null> {
+    return this.userAccounts.find(u => u.email === email) ?? null;
+  }
 
-    const userAccount = foundUserAccount ? foundUserAccount : null;
-
-    return Promise.resolve(userAccount);
+  async findByUsername(username: string): Promise<UserAccount | null> {
+    return this.userAccounts.find(u => u.username === username) ?? null;
   }
 }
