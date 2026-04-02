@@ -1,4 +1,4 @@
-import { Permission } from 'src/auth/domain/Permission';
+import { Permission } from 'src/auth/permissions/domain/Permission';
 import {
   Column,
   CreateDateColumn,

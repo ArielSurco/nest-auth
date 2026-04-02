@@ -4,7 +4,7 @@ import {
   Permission,
   PermissionAttributes,
   PermissionPrimitive,
-} from './Permission';
+} from '../permissions/domain/Permission';
 
 export interface RoleAttributes {
   id: string;

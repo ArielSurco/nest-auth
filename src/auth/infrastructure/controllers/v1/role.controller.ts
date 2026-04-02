@@ -9,7 +9,7 @@ import {
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
-import { GlobalPermissionCode } from 'src/auth/domain/GlobalPermissionCode';
+import { GlobalPermissionCode } from 'src/auth/permissions/domain/GlobalPermissionCode';
 import { CreateRole } from '../../../application/createRole';
 import { GetAllRoles } from '../../../application/getAllRoles';
 import { Permissions } from '../../decorators/permission.decorator';

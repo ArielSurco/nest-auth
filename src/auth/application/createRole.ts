@@ -1,5 +1,5 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
-import { PermissionRepository } from '../domain/PermissionRepository';
+import { PermissionRepository } from '../permissions/domain/PermissionRepository';
 import { Role, RolePrimitive } from '../domain/Role';
 import { RoleRepository } from '../domain/RoleRepository';
 

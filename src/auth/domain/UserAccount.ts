@@ -1,6 +1,6 @@
 import { CustomPartial } from 'src/shared/types/CustomPartial';
 import { v4 as uuidv4 } from 'uuid';
-import { PermissionAttributes } from './Permission';
+import { PermissionAttributes } from '../permissions/domain/Permission';
 import { Role, RolePrimitive } from './Role';
 
 export interface UserAccountAttributes {

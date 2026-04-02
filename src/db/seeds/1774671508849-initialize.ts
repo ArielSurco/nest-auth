@@ -1,14 +1,14 @@
 import * as bcrypt from 'bcrypt';
 import 'dotenv/config';
 import { In, MigrationInterface, QueryRunner } from 'typeorm';
-import { GlobalPermissionCode } from '../../auth/domain/GlobalPermissionCode';
-import { Permission, PermissionAttributes } from '../../auth/domain/Permission';
+import { GlobalPermissionCode } from '../../auth/permissions/domain/GlobalPermissionCode';
+import { Permission, PermissionAttributes } from '../../auth/permissions/domain/Permission';
 import { Role, RoleAttributes } from '../../auth/domain/Role';
 import {
   UserAccount,
   UserAccountAttributes,
 } from '../../auth/domain/UserAccount';
-import { PermissionEntity } from '../../auth/infrastructure/entities/PermissionEntity';
+import { PermissionEntity } from '../../auth/permissions/infrastructure/entities/PermissionEntity';
 import { RoleEntity } from '../../auth/infrastructure/entities/RoleEntity';
 import { UserAccountEntity } from '../../auth/infrastructure/entities/UserAccountEntity';
 

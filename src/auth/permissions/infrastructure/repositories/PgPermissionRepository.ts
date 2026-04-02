@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectDataSource } from '@nestjs/typeorm';
-import { Permission, PermissionPrimitive } from 'src/auth/domain/Permission';
-import { PermissionRepository } from 'src/auth/domain/PermissionRepository';
+import { Permission, PermissionPrimitive } from 'src/auth/permissions/domain/Permission';
+import { PermissionRepository } from 'src/auth/permissions/domain/PermissionRepository';
 import { DataSource, In } from 'typeorm';
 import { PermissionEntity } from '../entities/PermissionEntity';
 
