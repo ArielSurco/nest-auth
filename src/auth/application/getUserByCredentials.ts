@@ -1,6 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
-import { UserAccount, UserAccountPrimitive } from '../../users/domain/UserAccount';
+import {
+  UserAccount,
+  UserAccountPrimitive,
+} from '../../users/domain/UserAccount';
 import { UserAccountRepository } from '../../users/domain/UserAccountRepository';
 
 @Injectable()

@@ -29,6 +29,6 @@ import { UsersModule } from '../users/users.module';
     SessionService,
     AuthGuard,
   ],
-  exports: [AuthGuard, SessionService],
+  exports: [AuthGuard, SessionService, UsersModule],
 })
 export class AuthModule {}
