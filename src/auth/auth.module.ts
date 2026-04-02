@@ -4,10 +4,10 @@ import { JwtModule } from '@nestjs/jwt';
 import { GetUserByCredentials } from './application/getUserByCredentials';
 import { GetUserById } from './application/getUserById';
 import { SignUp } from './application/signUp';
-import { UserAccountRepository } from './domain/UserAccountRepository';
+import { UserAccountRepository } from './users/domain/UserAccountRepository';
 import { AuthController } from './infrastructure/controllers/v1/auth.controller';
 import { AuthGuard } from './infrastructure/guards/auth.guard';
-import { PgUserAccountRepository } from './infrastructure/repositories/PgUserAccountRepository';
+import { PgUserAccountRepository } from './users/infrastructure/repositories/PgUserAccountRepository';
 import { SessionService } from './infrastructure/services/session.service';
 
 @Module({

@@ -1,6 +1,6 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
-import { UserAccount } from '../domain/UserAccount';
-import { UserAccountRepository } from '../domain/UserAccountRepository';
+import { UserAccount } from '../users/domain/UserAccount';
+import { UserAccountRepository } from '../users/domain/UserAccountRepository';
 
 @Injectable()
 export class GetUserById {

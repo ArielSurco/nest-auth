@@ -1,7 +1,7 @@
 import { UnauthorizedException } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
-import { UserAccountRepository } from '../domain/UserAccountRepository';
-import { MemoryUserAccountRepository } from '../infrastructure/repositories/MemoryUserAccountRepository';
+import { UserAccountRepository } from '../users/domain/UserAccountRepository';
+import { MemoryUserAccountRepository } from '../users/infrastructure/repositories/MemoryUserAccountRepository';
 import { GetUserById } from './getUserById';
 
 describe('GetUserById', () => {
@@ -24,7 +24,7 @@ describe('GetUserById', () => {
   });
 
   it('should return UserAccount when id exists', async () => {
-    const { UserAccount } = await import('../domain/UserAccount');
+    const { UserAccount } = await import('../users/domain/UserAccount');
     const user = UserAccount.create({
       username: 'testuser',
       email: 'test@test.com',

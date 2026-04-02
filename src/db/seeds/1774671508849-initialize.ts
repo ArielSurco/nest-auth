@@ -7,10 +7,10 @@ import { Role, RoleAttributes } from '../../auth/roles/domain/Role';
 import {
   UserAccount,
   UserAccountAttributes,
-} from '../../auth/domain/UserAccount';
+} from '../../auth/users/domain/UserAccount';
 import { PermissionEntity } from '../../auth/permissions/infrastructure/entities/PermissionEntity';
 import { RoleEntity } from '../../auth/roles/infrastructure/entities/RoleEntity';
-import { UserAccountEntity } from '../../auth/infrastructure/entities/UserAccountEntity';
+import { UserAccountEntity } from '../../auth/users/infrastructure/entities/UserAccountEntity';
 
 const permissionsPrimitives: Omit<
   PermissionAttributes,

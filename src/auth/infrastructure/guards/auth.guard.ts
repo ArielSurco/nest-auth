@@ -8,7 +8,7 @@ import {
 import { Reflector } from '@nestjs/core';
 import { Request } from 'express';
 import { PermissionAttributes } from 'src/auth/permissions/domain/Permission';
-import { UserAccountRepository } from 'src/auth/domain/UserAccountRepository';
+import { UserAccountRepository } from 'src/auth/users/domain/UserAccountRepository';
 import { Permissions } from '../decorators/permission.decorator';
 import { SessionService } from '../services/session.service';
 

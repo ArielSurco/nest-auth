@@ -1,4 +1,4 @@
-import { UserAccount } from 'src/auth/domain/UserAccount';
+import { UserAccount } from 'src/auth/users/domain/UserAccount';
 import {
   Column,
   CreateDateColumn,
@@ -9,7 +9,7 @@ import {
   PrimaryColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { RoleEntity } from '../../roles/infrastructure/entities/RoleEntity';
+import { RoleEntity } from '../../../roles/infrastructure/entities/RoleEntity';
 
 @Entity('user_account')
 export class UserAccountEntity {
